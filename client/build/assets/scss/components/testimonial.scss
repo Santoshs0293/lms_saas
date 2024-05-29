@@ -1,0 +1,35 @@
+.testimonial-container{
+    background-color: #cccccc26;
+    @include big-padding();
+    .test-row{
+        .test-card{
+            display: flex;
+            padding: 10px;
+            background-color: #FFF;
+            box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+            margin-bottom: 20px;
+            .image{
+                img{
+                    min-width: 110px;
+                }
+                
+            }
+            .detail{
+                padding-left: 10px;
+                margin: auto;
+                h3{
+                    font-size: 1.2rem;
+                    font-family: $font-bold;
+                    margin-bottom: 0px;
+                }
+                p{
+                    font-size: .9rem;
+                    text-indent: 20px;
+                }
+            }
+            &:hover{
+                @include shado-1();
+            }
+        }
+    }
+}

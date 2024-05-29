@@ -1,0 +1,6 @@
+/* styles.css */
+.box-fix {
+    display: flex;
+    flex-direction: column;
+  }
+  

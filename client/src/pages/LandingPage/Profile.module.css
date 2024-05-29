@@ -1,0 +1,34 @@
+.avatar{
+   display: flex;
+   /* justify-content: left; */
+   align-items: left;
+   position: relative;
+
+    
+}
+
+.avatar__profile__pic{
+    height: 130px !important;
+    width: 130px !important;
+    
+}
+
+
+.grid-container {
+    display: grid; /* Use grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+    grid-gap: 20px; /* Gap between grid items */
+  }
+
+
+  .row {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+  }
+  
+  .column {
+    flex: 1; /* Make each column take up equal space */
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    align-items: center; /* Center content vertically */
+  }

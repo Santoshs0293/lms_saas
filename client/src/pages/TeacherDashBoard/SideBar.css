@@ -1,0 +1,59 @@
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    float: left;
+    text-align: left;
+  }
+  
+  .option {
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    float: left;
+  }
+  
+  .sub-options {
+    margin-top: 10px;
+    padding-left: 10px;
+  }
+  
+  .sub-options a {
+    display: block;
+    padding: 5px 0;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .sub-options a:hover {
+    background-color: #e4e4e4;
+  }
+  
+  .active-link {
+    background-color: #ccc !important;
+  }
+  
+  .menu-icon,
+  .sub-menu-icon {
+    padding-right: 10px;
+  }
+  
+  .menu-text {
+    margin-right: 10px;
+  }
+  
+  .site-menu.main-menu.js-clone-nav li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .site-menu.main-menu.js-clone-nav li:last-child {
+    margin-right: 0;
+  }
+  
+  .site-menu.main-menu.js-clone-nav li a {
+    display: inline-block;
+  }
+  

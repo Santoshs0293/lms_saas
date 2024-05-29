@@ -1,0 +1,839 @@
+/* =======================================================================
+Template Name: Dil Hospital
+Author:  SmartEye Adminpanel
+Author URI: www.smarteyeapps.com
+Version: 1.0
+coder name:Prabin Raja
+Description: This Template is created for web template
+======================================================================= */
+/* ===================================== Import Less ================================== */
+:root {
+  --color-font: #808291;
+  --color-primary: #3ed2a7;
+  --color-secondary: #ffb09f;
+  --color-link: #a7a9b8;
+  --color-link-hover: #181b31;
+  --color-gradient-start: #4fda91;
+  --color-gradient-stop: #34dbc5;
+  --color-img-holder: #efefef; }
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url("../fonts/GlacialIndifference-Regular.html") format("woff2"), url("../fonts/basiersquare-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal; }
+@font-face {
+  font-family: 'Glacial Indifference bold';
+  src: url("../fonts/GlacialIndifference-Bold.html") format("woff2"), url("../fonts/GlacialIndifference-Bold.woff") format("woff");
+  font-weight: bold;
+  font-display: swap;
+  font-style: normal; }
+@font-face {
+  font-family: 'title-font';
+  src: url("../fonts/cerebri-sans.woff") format("truetype"); }
+/* ===================================== Basic CSS ================================== */
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none;
+  outline: none;
+  color: #444; }
+
+a:hover {
+  color: #444; }
+
+ul {
+  margin-bottom: 0;
+  padding-left: 0; }
+
+a:hover,
+a:focus,
+input,
+textarea {
+  text-decoration: none;
+  outline: none; }
+
+.center {
+  text-align: center; }
+
+.left {
+  text-align: left; }
+
+.right {
+  text-align: right; }
+
+.cp {
+  cursor: pointer; }
+
+html, body {
+  height: 100%; }
+
+p {
+  margin-bottom: 0px;
+  width: 100%; }
+
+.no-padding {
+  padding: 0px; }
+
+.no-margin {
+  margin: 0px; }
+
+.hid {
+  display: none; }
+
+.top-mar {
+  margin-top: 15px; }
+
+.h-100 {
+  height: 100%; }
+
+::placeholder {
+  color: #747f8a !important;
+  font-size: 13px;
+  opacity: .5 !important; }
+
+.container-fluid {
+  padding: 0px; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: font-bold; }
+
+strong {
+  font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+
+body {
+  background-color: #ffffff !important;
+  font-family: "Glacial Indifference", "Open Sans", sans-serif;
+  color: #6A6A6A; }
+
+.session-title {
+  padding: 30px;
+  margin: 0px; }
+  .session-title h2 {
+    width: 100%;
+    text-align: center;
+    font-family: "title-font", "Open Sans", sans-serif; }
+  .session-title p {
+    max-width: 850px;
+    text-align: center;
+    float: none;
+    margin: auto; }
+  .session-title span {
+    float: right;
+    font-style: italic; }
+
+.inner-title {
+  padding: 20px;
+  padding-left: 0px;
+  margin-bottom: 30px; }
+  .inner-title h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem; }
+  .inner-title p {
+    width: 100%;
+    text-align: center; }
+
+.page-nav {
+  padding: 40px;
+  text-align: center;
+  background-color: #00000026; }
+  .page-nav ul {
+    float: none;
+    margin: auto; }
+  @media screen and (max-width: 911px) {
+    .page-nav {
+      padding-top: 106px; } }
+  .page-nav h2 {
+    font-size: 36px;
+    width: 100%;
+    color: #444; }
+    @media screen and (max-width: 600px) {
+      .page-nav h2 {
+        font-size: 26px; } }
+  .page-nav ul li {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 16px; }
+    .page-nav ul li i {
+      width: 30px;
+      text-align: center;
+      color: #444; }
+    .page-nav ul li a {
+      color: #444; }
+
+.btn-success {
+  background-color: #223d50;
+  border-color: #223d50; }
+  .btn-success:hover {
+    background-color: #223d50 !important;
+    border-color: #223d50 !important; }
+  .btn-success:active {
+    background-color: #223d50 !important;
+    border-color: #223d50 !important; }
+  .btn-success:focus {
+    background-color: #223d50 !important;
+    border-color: #223d50 !important;
+    box-shadow: none !important; }
+
+.btn-primary {
+  background-color: #FF3A46;
+  border-color: #FF3A46; }
+  .btn-primary:hover {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important; }
+  .btn-primary:active {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important; }
+  .btn-primary:focus {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important;
+    box-shadow: none !important; }
+
+.btn {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px; }
+
+.form-control:focus {
+  box-shadow: none !important;
+  border: 2px solid  #863dd9; }
+
+.btn-light {
+  background-color: #FFF;
+  color: #3F3F3F; }
+
+.collapse.show {
+  display: block !important; }
+
+.form-control:focus {
+  box-shadow: none;
+  border: 2px solid #863dd9 !important; }
+
+.form-control {
+  background-color: #F8F8F8;
+  margin-bottom: 20px; }
+  .form-control:focus {
+    background-color: #FFF;
+    border-color: #CCC; }
+
+.container {
+  max-width: 1100px; }
+  @media screen and (max-width: 575px) {
+    .container {
+      padding: 10px 15px; } }
+
+.btn-success {
+  background-color: #107d6a;
+  border-color: #107d6a; }
+  .btn-success:hover {
+    background-color: #107d6a !important;
+    border-color: #107d6a !important; }
+  .btn-success:active {
+    background-color: #107d6a !important;
+    border-color: #107d6a !important; }
+  .btn-success:focus {
+    background-color: #107d6a !important;
+    border-color: #107d6a !important;
+    box-shadow: none !important; }
+
+.btn-primary {
+  background-color: #FF3A46;
+  border-color: #FF3A46; }
+  .btn-primary:hover {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important; }
+  .btn-primary:active {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important; }
+  .btn-primary:focus {
+    background-color: #FF3A46 !important;
+    border-color: #FF3A46 !important;
+    box-shadow: none !important; }
+
+.btn {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px; }
+
+.btn-outline-primary {
+  border-radius: 50px;
+  padding: 5px 25px;
+  color: #FF3A46;
+  border-color: #FF3A46;
+  font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+
+/* ===================================== Header CSS ================================== */
+.header-container {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  background-color: #1a1c28;
+  position: absolute;
+  z-index: 999; }
+  .header-container .header-top {
+    padding: 5px; }
+    @media screen and (max-width: 991px) {
+      .header-container .header-top {
+        padding: 5px; } }
+    @media screen and (max-width: 575px) {
+      .header-container .header-top {
+        padding: 0px; } }
+    .header-container .header-top ul {
+      float: right; }
+      .header-container .header-top ul li {
+        float: left;
+        color: #FFF;
+        padding: 18px;
+        font-size: 1rem; }
+    .header-container .header-top img {
+      margin-top: 10px;
+      width: 80%; }
+      @media screen and (max-width: 991px) {
+        .header-container .header-top img {
+          width: 230px;
+          margin-top: 6px; } }
+    .header-container .header-top .navbar-toggler {
+      float: right;
+      margin-top: 1px;
+      padding-right: 0px; }
+      .header-container .header-top .navbar-toggler i {
+        color: #FFF;
+        padding: 10px;
+        border: 1px solid #FFF;
+        border-radius: 5px; }
+  .header-container .header-bottom {
+    background-color: #000000; }
+    @media screen and (max-width: 767px) {
+      .header-container .header-bottom .container {
+        padding: 0px 10px !important; } }
+    .header-container .header-bottom .navbar {
+      background-color: #000000 !important;
+      padding: 0px; }
+      .header-container .header-bottom .navbar .navbar-brand {
+        color: #FFF; }
+      .header-container .header-bottom .navbar .nav-link {
+        color: #FFF;
+        padding: 15px 20px;
+        font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+
+.scroll-to-fixed-fixed {
+  padding: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+
+/* ===================================== Slider CSS ================================== */
+.slider-detail {
+  /* padding-top: 124px; */
+ }
+  @media screen and (max-width: 992px) {
+    .slider-detail {
+      padding-top: 52px; } }
+  @media screen and (max-width: 576px) {
+    .slider-detail {
+      padding-top: 72px; } }
+  .slider-detail .carousel-caption {
+    text-align: left;
+    bottom: 110px; }
+    @media screen and (max-width: 991px) {
+      .slider-detail .carousel-caption {
+        bottom: 10px; }
+        .slider-detail .carousel-caption h5 {
+          font-size: 28px; } }
+    @media screen and (max-width: 800px) {
+      .slider-detail .carousel-caption h5 {
+        font-size: 18px; } }
+    .slider-detail .carousel-caption h5 {
+      font-size: 44px;
+      margin-left: -40px;
+      font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+    .slider-detail .carousel-caption p {
+      margin-left: -40px;
+      font-weight: 600;
+      margin-top: 40px;
+      font-size: 16px; }
+  .slider-detail .vbh {
+    margin-left: -40px; }
+    .slider-detail .vbh .btn {
+      padding: 20px;
+      margin-top: 40px;
+      font-weight: 600;
+      font-size: 18px; }
+  .slider-detail .vdg-cur {
+    color: #ffffff; }
+  .slider-detail .fvgb {
+    color: #ffffff; }
+
+/* ===================================== Key Features CSS ================================== */
+.key-feature {
+  padding: 50px; }
+  @media screen and (max-width: 940px) {
+    .key-feature {
+      padding: 30px 10px; } }
+  .key-feature .session-title {
+    padding-top: 10px; }
+  .key-feature .key-cover {
+    padding: 15px;
+    border: 1px solid #cccccc85;
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 20px;
+    background-color: #fcfcfc;
+    border-radius: 50%; }
+    .key-feature .key-cover i {
+      padding: 18px;
+      border: 1px solid #cccccc85;
+      border-radius: 50px;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      margin-bottom: 20px;
+      margin-top: -40px;
+      position: absolute;
+      margin-left: -30px;
+      background-color: #FFF;
+      font-size: 22px; }
+    .key-feature .key-cover h4 {
+      font-size: 1.1rem;
+      text-align: center;
+      margin-top: 30px;
+      font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+    .key-feature .key-cover p {
+      font-size: .85rem;
+      text-align: center;
+      padding: 0px 20px;
+      margin-bottom: 20px; }
+    .key-feature .key-cover:hover {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      background-color: #FFF; }
+
+/* ===================================== Testimonial CSS ================================== */
+.testimonial-container {
+  background-color: #cccccc26;
+  padding: 50px; }
+  @media screen and (max-width: 940px) {
+    .testimonial-container {
+      padding: 30px 10px; } }
+  .testimonial-container .test-row .test-card {
+    display: flex;
+    padding: 10px;
+    background-color: #FFF;
+    box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+    margin-bottom: 20px; }
+    .testimonial-container .test-row .test-card .image img {
+      min-width: 110px; }
+    .testimonial-container .test-row .test-card .detail {
+      padding-left: 10px;
+      margin: auto; }
+      .testimonial-container .test-row .test-card .detail h3 {
+        font-size: 1.2rem;
+        font-family: "Glacial Indifference bold", "Open Sans", sans-serif;
+        margin-bottom: 0px; }
+      .testimonial-container .test-row .test-card .detail p {
+        font-size: .9rem;
+        text-indent: 20px; }
+    .testimonial-container .test-row .test-card:hover {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+
+/* ===================================== About Us CSS ================================== */
+.about-company {
+  padding: 50px;
+  background-color: #fff; }
+  @media screen and (max-width: 940px) {
+    .about-company {
+      padding: 30px 10px; } }
+  .about-company .detail h3 {
+    font-family: "Glacial Indifference", "Open Sans", sans-serif;
+    font-size: 1.8rem; }
+  .about-company .detail p {
+    font-size: .85rem;
+    text-align: justify; }
+  .about-company .imag {
+    padding: 10px; }
+    .about-company .imag img {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      background-color: #FFF;
+      padding: 5px; }
+
+/* ===================================== Latest News CSS ================================== */
+.blog-container {
+  background-color: #cccccc26;
+  padding: 50px; }
+  @media screen and (max-width: 940px) {
+    .blog-container {
+      padding: 30px 10px; } }
+  .blog-container .news-row .news-card {
+    display: flex;
+    background-color: #FFF;
+    box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+    margin-bottom: 20px; }
+    .blog-container .news-row .news-card .detail {
+      padding: 10px;
+      margin: auto; }
+      .blog-container .news-row .news-card .detail h3 {
+        font-size: 1.1rem;
+        font-family: "Glacial Indifference bold", "Open Sans", sans-serif;
+        margin-bottom: 0px; }
+      .blog-container .news-row .news-card .detail p {
+        font-size: .9rem;
+        text-indent: 20px;
+        text-align: justify; }
+      .blog-container .news-row .news-card .detail .footp {
+        text-indent: 0px;
+        background-color: #f2f6f7a1;
+        margin-top: 5px;
+        font-size: .8rem; }
+        .blog-container .news-row .news-card .detail .footp span {
+          padding: 0px 5px; }
+    .blog-container .news-row .news-card:hover {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+
+/* ===================================== Count CSS ================================== */
+.our-capablit {
+  background-color: #1bbc9b;
+  background-size: 100%; }
+  .our-capablit .layy {
+    padding: 50px;
+    padding: 80px; }
+    @media screen and (max-width: 940px) {
+      .our-capablit .layy {
+        padding: 30px 10px; } }
+  .our-capablit .cap-det {
+    text-align: center;
+    margin-bottom: 20px; }
+    .our-capablit .cap-det h6 {
+      margin-top: 30px;
+      color: #FFF;
+      margin-bottom: 20px;
+      font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+    .our-capablit .cap-det p {
+      font-size: .85rem;
+      color: #FFF; }
+
+.progress {
+  width: 100px;
+  height: 100px;
+  background: none;
+  position: relative; }
+
+.progress::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #eee;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.progress > span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  z-index: 1; }
+
+.progress .progress-left {
+  left: 0; }
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 6px;
+  border-style: solid;
+  position: absolute;
+  top: 0; }
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left; }
+
+.progress .progress-right {
+  right: 0; }
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right; }
+
+.progress .progress-value {
+  position: absolute;
+  top: 0;
+  left: 0; }
+  .progress .progress-value .h2 {
+    font-size: 1.2rem;
+    margin-top: 13px;
+    color: #FFF; }
+
+/* ===================================== Our Team CSS ================================== */
+.our-team {
+  padding: 50px;
+  background-color: #cccccc1c; }
+  @media screen and (max-width: 940px) {
+    .our-team {
+      padding: 30px 10px; } }
+  .our-team .team-row {
+    margin-top: 20px; }
+    .our-team .team-row .single-usr {
+      box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 2px 6px 0 rgba(206, 206, 238, 0.54);
+      margin-bottom: 20px; }
+      .our-team .team-row .single-usr img {
+        width: 100%; }
+      .our-team .team-row .single-usr .det-o {
+        padding: 20px;
+        background-color: #1bbc9b; }
+        .our-team .team-row .single-usr .det-o h4 {
+          color: #FFF;
+          margin-bottom: 0px; }
+        .our-team .team-row .single-usr .det-o i {
+          color: #FFF; }
+
+/* ===================================== Our Skills CSS ================================== */
+/* ===================================== Services CSS ================================== */
+.services {
+  padding: 50px; }
+  @media screen and (max-width: 940px) {
+    .services {
+      padding: 30px 10px; } }
+  .services .service-row .service-card {
+    margin-bottom: 30px; }
+    .services .service-row .service-card:hover h4 {
+      color: #1bbc9b; }
+      .services .service-row .service-card:hover h4 i {
+        background-color: #1bbc9b; }
+    .services .service-row .service-card h4 {
+      font-size: 1rem;
+      font-family: "Glacial Indifference bold", "Open Sans", sans-serif;
+      margin-bottom: 10px; }
+      .services .service-row .service-card h4 i {
+        font-size: 1.2rem;
+        margin-right: 10px;
+        background-color: #34495e;
+        text-align: center;
+        padding-top: 10px;
+        color: #FFF;
+        width: 40px;
+        height: 40px;
+        border-radius: 50px; }
+    .services .service-row .service-card p {
+      font-size: .9rem;
+      text-align: justify; }
+    .services .service-row .service-card span {
+      font-size: .75rem;
+      color: #1bbc9b; }
+
+/* ===================================== Pricing CSS ================================== */
+.price-tab {
+  padding: 50px;
+  background-color: #cccccc1c; }
+  @media screen and (max-width: 940px) {
+    .price-tab {
+      padding: 30px 10px; } }
+  .price-tab .session-title {
+    margin-bottom: 40px; }
+  .price-tab .product-box {
+    background-color: #FFF;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+    .price-tab .product-box .product-header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #CCC; }
+      .price-tab .product-box .product-header h4 {
+        margin-bottom: 0px; }
+      .price-tab .product-box .product-header p {
+        font-size: .9rem; }
+    .price-tab .product-box .product-popular {
+      padding: 16px;
+      color: #FFF;
+      background-color: #18ad90;
+      font-family: "Glacial Indifference bold", "Open Sans", sans-serif;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      text-align: center; }
+    .price-tab .product-box .ppo {
+      background-color: #2e4054; }
+    .price-tab .product-box .product-price {
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      border-bottom: 1px solid #cccccc70; }
+      .price-tab .product-box .product-price .rokij {
+        width: 120px;
+        height: 120px;
+        box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.11) !important;
+        border-radius: 50%;
+        text-align: center;
+        background-color: #f3f7f8;
+        float: none;
+        margin: auto;
+        padding-top: 25px; }
+        .price-tab .product-box .product-price .rokij p {
+          font-size: .8rem; }
+    .price-tab .product-box .product-features {
+      text-align: center; }
+      .price-tab .product-box .product-features ul li {
+        padding: 10px;
+        color: #444;
+        font-family: "Glacial Indifference", "Open Sans", sans-serif;
+        font-size: .9rem; }
+        .price-tab .product-box .product-features ul li:nth-child(even) {
+          background: #cccccc30; }
+      .price-tab .product-box .product-features .smal li {
+        font-weight: 300;
+        color: #6d6a6a;
+        font-size: .9rem;
+        font-family: "Glacial Indifference", "Open Sans", sans-serif; }
+    .price-tab .product-box .product-order {
+      padding: 20px; }
+      .price-tab .product-box .product-order a {
+        background-color: #18ad90;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        border-color: #18ad90;
+        font-family: "Glacial Indifference bold", "Open Sans", sans-serif; }
+        .price-tab .product-box .product-order a i {
+          margin-right: 10px; }
+        .price-tab .product-box .product-order a:hover {
+          color: #FFF; }
+  .price-tab .ultimate {
+    margin-top: -40px;
+    margin-bottom: 40px; }
+    @media screen and (max-width: 991px) {
+      .price-tab .ultimate {
+        margin-top: 30px; } }
+  .price-tab .inner-title {
+    margin-bottom: 80px; }
+
+.pp-top {
+  padding-top: 100px; }
+
+/* ===================================== Footer CSS ================================== */
+footer {
+  padding: 50px;
+  background-color: #222;
+  color: #FFF; }
+  @media screen and (max-width: 940px) {
+    footer {
+      padding: 30px 10px; } }
+  footer h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px; }
+  footer .about p {
+    font-size: .9em;
+    margin-bottom: 20px; }
+  footer .about .foot-address {
+    display: flex; }
+    footer .about .foot-address .icon {
+      padding: 20px 10px; }
+    footer .about .foot-address .addet {
+      font-size: .9rem;
+      margin: auto 0px; }
+  footer .fotblog .blohjb {
+    margin-bottom: 10px; }
+    footer .fotblog .blohjb p {
+      font-size: .9rem; }
+    footer .fotblog .blohjb span {
+      font-size: .9rem; }
+  footer .glink ul li {
+    padding: 10px; }
+    footer .glink ul li i {
+      margin-right: 10px; }
+    footer .glink ul li a {
+      color: #FFF; }
+  footer .tags ul li {
+    float: left;
+    padding: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #CCC; }
+
+.copy {
+  padding: 20px;
+  background-color: #2E2E2E;
+  color: #FFF; }
+  .copy a {
+    color: #FFF; }
+  .copy span {
+    float: right; }
+    .copy span i {
+      margin-right: 20px; }
+
+/* ===================================== Footer CSS ================================== */
+.contact-rooo .pr-0 {
+  padding-right: 0px; }
+.contact-rooo .cont-row {
+  margin-top: 10px; }
+  .contact-rooo .cont-row .col-sm-3 {
+    padding-right: 0px; }
+    .contact-rooo .cont-row .col-sm-3 span {
+      float: right; }
+
+/* ===================================== Footer CSS ================================== */
+/* ===================================== Gallery Style  ================================== */
+.gallery-filter {
+  width: 100%;
+  text-align: center; }
+
+.gallery-filter .btn {
+  background-color: #FFF; }
+
+.gallery {
+  padding: 30px;
+  background-color: #fbfbfb; }
+
+.gallery-title {
+  font-size: 36px;
+  color: #1bbc9b;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 70px; }
+
+.gallery-title:after {
+  content: "";
+  position: absolute;
+  width: 7.5%;
+  left: 46.5%;
+  height: 45px;
+  border-bottom: 1px solid #1bbc9b; }
+
+.filter-button {
+  font-size: 18px;
+  border: 1px solid #1bbc9b;
+  border-radius: 5px;
+  text-align: center;
+  color: #1bbc9b;
+  margin-bottom: 30px; }
+
+.filter-button:hover {
+  font-size: 18px;
+  border: 1px solid #1bbc9b;
+  border-radius: 5px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1bbc9b; }
+
+.btn-default:active .filter-button:active {
+  background-color: #1bbc9b;
+  color: white; }
+
+.port-image {
+  width: 100%; }
+
+.gallery_product {
+  margin-bottom: 30px; }
+
+

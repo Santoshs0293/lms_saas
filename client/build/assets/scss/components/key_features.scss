@@ -1,0 +1,45 @@
+.key-feature{
+    @include big-padding();
+    .session-title{
+        padding-top: 10px;
+    }
+    .key-cover{
+        padding: 15px;
+        border: 1px solid #cccccc85;
+        text-align: center;
+        margin-bottom: 60px;
+        margin-top: 20px;
+        background-color: #fcfcfc;
+        border-radius: 50%;
+        i{
+            padding: 18px;
+            border: 1px solid #cccccc85;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: -40px;
+            position: absolute;
+            margin-left: -30px;
+            background-color: #FFF;
+            font-size: 22px;
+        }
+        h4{
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 30px;
+            font-family: $font-bold;
+        }
+        p{
+            font-size: .85rem;
+            text-align: center;
+            padding: 0px 20px;
+            margin-bottom: 20px;
+        }
+        &:hover{
+            @include shado-1();
+            background-color: #FFF;
+        }
+    }
+}

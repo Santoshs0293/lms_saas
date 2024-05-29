@@ -1,0 +1,51 @@
+.slider-detail{
+    padding-top: 124px;
+    @media screen and (max-width: 992px){
+        padding-top: 52px;
+    }
+    @media screen and (max-width: 576px){
+        padding-top: 72px;
+    }
+    .carousel-caption{
+        text-align: left;
+        bottom: 110px;
+        @media screen and (max-width: 991px){
+            bottom: 10px;
+            h5{
+                font-size: 28px;
+            }
+        }
+        @media screen and (max-width: 800px){
+            h5{
+                font-size: 18px;
+            }
+        }
+        h5{
+            font-size: 44px;
+            margin-left: -40px;
+            font-family: $font-bold;
+        }
+        p{
+            margin-left: -40px;
+            font-weight: 600;
+            margin-top: 40px;
+            font-size: 16px;
+        }
+    }
+    .vbh{
+        margin-left: -40px;
+        .btn{
+            padding: 20px;
+            margin-top: 40px;
+           font-weight: 600;
+            font-size: 18px;
+        }
+    }
+    .vdg-cur{
+        color: #ffffff;
+    }
+    .fvgb{
+        color: #ffffff;
+    }
+    
+}
