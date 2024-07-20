@@ -9,4 +9,7 @@ router.post('/save', requireLogin, codeController.saveCode);
 // Get codes route
 router.get('/code', requireLogin, codeController.fetchCodes);
 
+// Get codes by id
+router.get('/code/:id', requireLogin, codeController.fetchCodesById);
+
 module.exports = router;

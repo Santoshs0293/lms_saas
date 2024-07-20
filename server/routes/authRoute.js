@@ -3,18 +3,21 @@ const {
   register__controller,
   details__controller
 } = require("../controllers/authController");
-const { login_validator} = require("../middlewares/loginValidator");
 const registerValidator = require("../middlewares/registerValidator");
 const loginValidator = require("../middlewares/loginValidator");
 const UserModel = require("../model/UserModel");
 const router = require("express").Router();
 
-router.post("/login", loginValidator,login_validator,login__controller)
+// Login route
+router.post("/login", loginValidator.login_validator, login__controller);
 
-router.post("/register",registerValidator, registerValidator.register_validator ,register__controller)
+// Register route
+router.post("/register", registerValidator.register_validator, register__controller);
 
-router.post('/details',registerValidator,registerValidator.register_validator, details__controller);
+// Details route for creating user details
+router.post('/details', details__controller);
 
+// Update user details by ID
 router.put('/details/:id', async (req, res) => {
   try {
     const userId = req.params.id;
@@ -50,6 +53,7 @@ router.put('/details/:id', async (req, res) => {
   }
 });
 
+// Get user details by ID
 router.get('/details/:id', async (req, res) => {
   try {
     const userId = req.params.id;
@@ -66,7 +70,7 @@ router.get('/details/:id', async (req, res) => {
   }
 });
 
-
+// Update user details (duplicate put route removed)
 router.put('/details/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -78,6 +82,5 @@ router.put('/details/:id', async (req, res) => {
     res.status(400).send('Error updating user details');
   }
 });
-
 
 module.exports = router;

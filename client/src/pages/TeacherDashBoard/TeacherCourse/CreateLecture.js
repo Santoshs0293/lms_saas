@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Sidebar from '../SideBar';
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
 
 const CreateCourse = () => {
-    const [courseId, setCourseId] = useState("");
+    const location = useLocation();
+    console.log(location);
+    const name = location.state;
+    const [courseId, setCourseId] = useState(name);
     const [lectures, setLectures] = useState([
         {
             title: "",
-            description: "",
+            description: " ",
             videoUrl: ""
         }
     ]);
@@ -94,6 +98,7 @@ const CreateCourse = () => {
                                                     <label className="form-label">Course ID</label>
                                                     <input
                                                         required
+                                                        disabled
                                                         type="text"
                                                         className="form-control"
                                                         value={courseId}

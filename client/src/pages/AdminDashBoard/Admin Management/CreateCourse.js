@@ -1,128 +1,137 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from '../SideBar'
+import Sidebar from '../SideBar';
 import { useDispatch } from "react-redux";
 import { fetchAllCourseInfo } from "../../../redux/course/courseAction";
-import axios from "axios"
+import axios from "axios";
 import { ChakraProvider, useToast } from "@chakra-ui/react";
+
 const CreateCourse = () => {
-    const [show, setShow] = useState(false);
-    const [lgShow, setLgShow] = useState(false);
-    const [courseThumbnail, setCourseThumbnail] = useState("");
-    const [courseDescription, setCourseDescription] = useState("");
-    const [courseName, setCourseName] = useState("");
-    const [courseLink, setCourseLink] = useState("");
-    const [coursePrice, setCoursePrice] = useState("");
-    const [coursePdf, setCoursePdf] = useState("");
-    const [pdfLabel, setPdfLabel] = useState("Choose PDF");
-    const [imgLabel, setImgLabel] = useState("Choose photo");
-    const [loading, setLoading] = useState(false);
-    const toast = useToast();
-    const [lectures, setLectures] = useState([
+  const [show, setShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
+  const [courseThumbnail, setCourseThumbnail] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [courseLink, setCourseLink] = useState("");
+  const [coursePrice, setCoursePrice] = useState("");
+  const [coursePdf, setCoursePdf] = useState("");
+  const [pdfLabel, setPdfLabel] = useState("Choose PDF");
+  const [imgLabel, setImgLabel] = useState("Choose photo");
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+  const [lectures, setLectures] = useState([
+    {
+      title: "",
+      description: "",
+      videoUrl: "",
+      pdfUrl : null, 
+    }
+  ]);
+  const [showLectureButton, setShowLectureButton] = useState(true);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const axiosInstance = axios.create({baseURL: process.env.REACT_APP_API_URL});
+  const dispatch = useDispatch();
+
+  const courseFormHandler = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("courseName", courseName);
+    formData.append("courseDescription", courseDescription);
+    formData.append("img", courseThumbnail);
+    formData.append("courseLink", courseLink);
+    formData.append("coursePrice", coursePrice);
+    formData.append("pdf", coursePdf);
+
+    // Append lectures data
+    const updatedLectures = lectures.map((lecture, index) => {
+      formData.append(`lecturePdf-${index}`, lecture.pdfFile); // Append PDF file to formData
+      return { ...lecture, pdfFile: undefined }; // Remove pdfFile before converting to JSON
+    });
+
+    formData.append("lectures", JSON.stringify(updatedLectures));
+
+    axiosInstance
+      .post("/post-course", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + localStorage.getItem("auth_token"),
+        },
+      })
+      .then((response) => {
+        setLoading(false);
+        toast({
+          title: "Course created successfully.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        setCourseDescription("");
+        setCourseName("");
+        setCourseThumbnail("");
+        setCourseLink("");
+        setCoursePrice("");
+        setCoursePdf("");
+        setPdfLabel("Choose PDF");
+        setLectures([
+          {
+            title: "",
+            description: "",
+            videoUrl: "",
+            pdfFile: null,
+          }
+        ]);
+        dispatch(fetchAllCourseInfo());
+        dispatch({
+          type: "GET__COURSES",
+          payload: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const handleLectureChange = (index, e) => {
+    const { name, value } = e.target;
+    const list = [...lectures];
+    list[index][name] = value;
+    setLectures(list);
+  };
+
+  const handleLectureFileChange = (index, e) => {
+    const list = [...lectures];
+    list[index].pdfFile = e.target.files[0];
+    setLectures(list);
+  };
+
+  const handleAddLecture = () => {
+    setLectures([
+      ...lectures,
       {
         title: "",
         description: "",
-        videoUrl: ""
+        videoUrl: "",
+        pdfUrl: null,
       }
     ]);
-    const [showLectureButton, setShowLectureButton] = useState(true);
+  };
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleRemoveLecture = (index) => {
+    const list = [...lectures];
+    list.splice(index, 1);
+    setLectures(list);
+  };
 
-    const axiosInstance = axios.create({baseURL : process.env.REACT_APP_API_URL})
-    const dispatch = useDispatch();
-  
-    const courseFormHandler = (e) => {
-      e.preventDefault();
-      setLoading(true);
-  
-      const formData = new FormData();
-      formData.append("courseName", courseName);
-      formData.append("courseDescription", courseDescription);
-      formData.append("img", courseThumbnail);
-      formData.append("courseLink", courseLink);
-      formData.append("coursePrice", coursePrice);
-      formData.append("pdf", coursePdf);
-    
-      // Append lectures data
-      formData.append("lectures", JSON.stringify(lectures));
-    
-      console.log(formData);
-    
-      axiosInstance
-        .post("/post-course", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + localStorage.getItem("auth_token"),
-          },
-        })
-        .then((response) => {
-          setLoading(false);
-          toast({
-            title: "Course created successfully.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-          setCourseDescription("");
-          setCourseName("");
-          setCourseThumbnail("");
-          setCourseLink("");
-          setCoursePrice("");
-          setCoursePdf("");
-          setPdfLabel("Choose PDF");
-          setLectures([
-            {
-              title: "",
-              description: "",
-              videoUrl: ""
-            }
-          ]);
-          dispatch(fetchAllCourseInfo());
-          dispatch({
-            type: "GET__COURSES",
-            payload: true,
-          });
-          if (response.data.message) {
-           
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    };
-    
-    const handleLectureChange = (index, e) => {
-      const { name, value } = e.target;
-      const list = [...lectures];
-      list[index][name] = value;
-      setLectures(list);
-    };
-  
-    const handleAddLecture = () => {
-      setLectures([
-        ...lectures,
-        {
-          title: "",
-          description: "",
-          videoUrl: ""
-        }
-      ]);
-    };
-  
-    const handleRemoveLecture = (index) => {
-      const list = [...lectures];
-      list.splice(index, 1);
-      setLectures(list);
-    };
-
-    return (
-      <div>
-        <ChakraProvider>
+  return (
+    <div>
+      <ChakraProvider>
         <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header" id="appContent">
-      
           <div className="app-main">
-            <Sidebar/>
+            <Sidebar />
             <div className="app-main-outer">
               <div className="app-main-inner">
                 <div className="page-title-actions px-3 d-flex">
@@ -134,8 +143,6 @@ const CreateCourse = () => {
                     </ol>
                   </nav>
                 </div>
-                
-
 
                 <div className="row" id="deleteTableItem">
                   <div className="col-md-12">
@@ -149,7 +156,6 @@ const CreateCourse = () => {
                               <div className="mb-3">
                                 <label className="form-label">Course Name</label>
                                 <input
-                                  required
                                   onChange={(e) => setCourseName(e.target.value)}
                                   value={courseName}
                                   type="text"
@@ -162,7 +168,6 @@ const CreateCourse = () => {
                               <div className="mb-3">
                                 <label className="form-label">Course Description</label>
                                 <input
-                                  required
                                   onChange={(e) => setCourseDescription(e.target.value)}
                                   value={courseDescription}
                                   className="form-control"
@@ -174,7 +179,6 @@ const CreateCourse = () => {
                               <div className="mb-3">
                                 <label className="form-label">Course Thumbnail</label>
                                 <input
-                                  required
                                   type="file"
                                   className="form-control"
                                   multiple 
@@ -182,7 +186,7 @@ const CreateCourse = () => {
                                   onChange={(e) => {
                                     console.log(e.target.files[0]);
                                     setCourseThumbnail(e.target.files[0]);
-                                    setImgLabel(`${e.target.files.length} file(s) selected`); // To display the selected file name
+                                    setImgLabel(`${e.target.files.length} file(s) selected`);
                                   }}
                                   id="custom-file"
                                   custom
@@ -194,12 +198,11 @@ const CreateCourse = () => {
                               <div className="mb-3">
                                 <label className="form-label">Course Link</label>
                                 <input
-                                  required
                                   onChange={(e) => setCourseLink(e.target.value)}
                                   value={courseLink}
                                   as="textarea"
                                   rows={1}
-                                  placeholder="Enter course Description"
+                                  placeholder="Enter course link"
                                   className="form-control"
                                 />
                               </div>
@@ -208,12 +211,11 @@ const CreateCourse = () => {
                               <div className="mb-3">
                                 <label className="form-label">Course Price</label>
                                 <input
-                                  required
                                   onChange={(e) => setCoursePrice(e.target.value)}
                                   value={coursePrice}
                                   as="textarea"
                                   rows={1}
-                                  placeholder="Enter course Description"
+                                  placeholder="Enter course price"
                                   className="form-control"
                                 />
                               </div>
@@ -223,7 +225,6 @@ const CreateCourse = () => {
                                 <label className="form-label">Course PDF (.pdf)</label>
                                 <div className="input-group">
                                   <input
-                                    required
                                     type="file"
                                     filename="pdf"
                                     className="form-control"
@@ -231,7 +232,7 @@ const CreateCourse = () => {
                                     onChange={(e) => {
                                       console.log(e.target.files[0]);
                                       setCoursePdf(e.target.files[0]);
-                                      setPdfLabel(`${e.target.files.length} file(s) selected`); // To display the selected file name
+                                      setPdfLabel(`${e.target.files.length} file(s) selected`);
                                     }}
                                     id="custom-file-pdf"
                                     custom
@@ -251,7 +252,6 @@ const CreateCourse = () => {
                                   <div className="mb-3">
                                     <label className="form-label">Title</label>
                                     <input
-                                 
                                       type="text"
                                       className="form-control"
                                       value={lecture.title}
@@ -262,7 +262,6 @@ const CreateCourse = () => {
                                   <div className="mb-3">
                                     <label className="form-label">Description</label>
                                     <textarea
-                                     
                                       className="form-control"
                                       value={lecture.description}
                                       onChange={(e) => handleLectureChange(index, e)}
@@ -272,7 +271,6 @@ const CreateCourse = () => {
                                   <div className="mb-3">
                                     <label className="form-label">Video URL</label>
                                     <input
-                                  
                                       type="text"
                                       className="form-control"
                                       value={lecture.videoUrl}
@@ -280,15 +278,21 @@ const CreateCourse = () => {
                                       name="videoUrl"
                                     />
                                   </div>
+                                  <div className="mb-3">
+                                    <label className="form-label">Lecture PDF</label>
+                                    <input
+                                      type="file"
+                                      className="form-control"
+                                      onChange={(e) => handleLectureFileChange(index, e)}
+                                    />
+                                  </div>
                                   <div className="float-right">
-  <div className="d-flex justify-content-end">
-    <button type="button" className="btn btn-danger btn-sm ml-2" onClick={() => handleRemoveLecture(index)}>
-      Remove
-    </button>
-  </div>
-</div>
-                               
-                               
+                                    <div className="d-flex justify-content-end">
+                                      <button type="button" className="btn btn-danger btn-sm ml-2" onClick={() => handleRemoveLecture(index)}>
+                                        Remove
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -305,9 +309,9 @@ const CreateCourse = () => {
             </div>
           </div>
         </div>
-        </ChakraProvider>
-      </div>
-    );
-  }
-  
+      </ChakraProvider>
+    </div>
+  );
+}
+
 export default CreateCourse;

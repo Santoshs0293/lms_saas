@@ -59,7 +59,7 @@ const Student = () => {
 
   const fetchUserDetails = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/auth/details/${userId}`);
+      const response = await axiosInstance.get(`/auth/details/${userId}`);
       setUserDetails(response.data);
       setFormData(response.data);
     } catch (error) {
@@ -114,7 +114,7 @@ const Student = () => {
     e.preventDefault();
     try {
       const userId = userData._id;
-      await axios.put(`http://localhost:5000/auth/details/${userId}`, formData, {
+      await axiosInstance.put(`/auth/details/${userId}`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }

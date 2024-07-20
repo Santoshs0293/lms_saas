@@ -49,6 +49,21 @@ const Sidebar = ({ onFileClick, onCodeSelect }) => {
           borderRadius={4}
           borderColor={isError ? "red.500" : "#333"}
           overflowY="scroll"
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: '#f1f1f1',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#888',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              background: '#555',
+            },
+          }}
         >
           {isLoading ? (
             <Text>Loading...</Text>

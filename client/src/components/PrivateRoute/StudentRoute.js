@@ -1,29 +1,14 @@
 import React from 'react';
-import { Navigate , Route } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
-const StudentRoute = ({ children, ...rest }) => {
-    const user=JSON.parse(localStorage.getItem("user"))
-   
+const StudentRoute = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
 
-    return (
-        <div>
-        <Route
-  {...rest}
-  render={({ location }) =>
-    user && user.role==="Student" ? (
-      children
-    ) : (
-      <Navigate 
-        to={{
-          pathname: "/login",
-          state: { from: location }
-        }}
-      />
-    )
-  }
-/>
-    </div>
-    );
+  return user && user.role === "Student" ? (
+    children
+  ) : (
+    <Navigate to="/login" />
+  );
 };
 
 export default StudentRoute;

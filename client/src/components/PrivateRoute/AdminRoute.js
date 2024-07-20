@@ -1,28 +1,14 @@
 import React from "react";
-import { Navigate , Route } from "react-router";
+import { Navigate } from "react-router-dom";
 
-const AdminRoute = ({ children, ...rest }) => {
+const AdminRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  return (
-    <div>
-      <Route
-        {...rest}
-        render={({ location }) =>
-          user && user.role === "Admin" ? (
-            children
-          ) : (
-            <Navigate 
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
-            />
-          )
-        }
-      />
-    </div>
-  );
+  if (user && user.role === "Admin") {
+    return children;
+  } else {
+    return <Navigate to="/login" />;
+  }
 };
 
 export default AdminRoute;

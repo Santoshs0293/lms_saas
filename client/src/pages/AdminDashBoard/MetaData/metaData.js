@@ -1,71 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../SideBar';
+import SeoForm from '../../../components/SeoForm';
+import SeoList from '../../../components/SeoList';
+
 
 const EditMetadataPage = () => {
-  const [metadata, setMetadata] = useState([]);
+  // const [metadata, setMetadata] = useState([]);
+
+  // useEffect(() => {
+  //   fetchMetadata();
+  // }, []);
+
+  // const fetchMetadata = () => {
+  //   axios.get('http://localhost:5000/metadata')
+  //     .then(response => setMetadata(response.data))
+  //     .catch(error => console.error('Error fetching metadata:', error));
+  // };
+
+  // const handleChange = (e, id) => {
+  //   const updatedMetadata = metadata.map(entry => {
+  //     if (entry._id === id) {
+  //       return { ...entry, [e.target.name]: e.target.value };
+  //     }
+  //     return entry;
+  //   });
+  //   setMetadata(updatedMetadata);
+  // };
+
+  // const handleAddEntry = () => {
+  //   setMetadata([...metadata, { _id: `temp_${Date.now()}`, title: '', description: '', keywords: '' }]);
+  // };
+
+  // const handleRemoveEntry = (id) => {
+  //   const confirmed = window.confirm('Are you sure you want to delete this entry?');
+  //   if (confirmed) {
+  //     const updatedMetadata = metadata.filter(entry => entry._id !== id);
+  //     setMetadata(updatedMetadata);
+  //     if (!id.startsWith('temp_')) {
+  //       axios.delete(`http://localhost:5000/metadata/${id}`)
+  //         .then(response => {
+  //           console.log('Metadata entry deleted successfully');
+  //           window.alert('Metadata entry deleted successfully');
+  //         })
+  //         .catch(error => console.error('Error deleting metadata entry:', error));
+  //     } else {
+  //       window.alert('Temporary entry deleted successfully');
+  //     }
+  //   }
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const confirmed = window.confirm('Are you sure you want to submit these changes?');
+  //   if (confirmed) {
+  //     metadata.forEach(entry => {
+  //       console.log('Submitting entry:', entry); // Log the data structure
+  //       if (entry._id.startsWith('temp_')) {
+  //         axios.post('http://localhost:5000/metadata', entry)
+  //           .then(response => console.log('Metadata created successfully'))
+  //           .catch(error => console.error('Error creating metadata:', error));
+  //       } else {
+  //         axios.put(`http://localhost:5000/metadata/${entry._id}`, entry)
+  //           .then(response => console.log('Metadata updated successfully'))
+  //           .catch(error => console.error('Error updating metadata:', error));
+  //       }
+  //     });
+  //     window.alert('Metadata submitted successfully');
+  //   }
+  // };
+
+  const [seoEntries, setSeoEntries] = useState([]);
+  const axiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+  });
+
+  const fetchSeoEntries = async () => {
+    try {
+      const response = await axiosInstance.get('/api/seo');
+      setSeoEntries(response.data);
+    } catch (error) {
+      console.error('Error fetching SEO entries', error);
+    }
+  };
 
   useEffect(() => {
-    fetchMetadata();
+    fetchSeoEntries();
   }, []);
-
-  const fetchMetadata = () => {
-    axios.get('http://localhost:5000/metadata')
-      .then(response => setMetadata(response.data))
-      .catch(error => console.error('Error fetching metadata:', error));
-  };
-
-  const handleChange = (e, id) => {
-    const updatedMetadata = metadata.map(entry => {
-      if (entry._id === id) {
-        return { ...entry, [e.target.name]: e.target.value };
-      }
-      return entry;
-    });
-    setMetadata(updatedMetadata);
-  };
-
-  const handleAddEntry = () => {
-    setMetadata([...metadata, { _id: `temp_${Date.now()}`, title: '', description: '', keywords: '' }]);
-  };
-
-  const handleRemoveEntry = (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this entry?');
-    if (confirmed) {
-      const updatedMetadata = metadata.filter(entry => entry._id !== id);
-      setMetadata(updatedMetadata);
-      if (!id.startsWith('temp_')) {
-        axios.delete(`http://localhost:5000/metadata/${id}`)
-          .then(response => {
-            console.log('Metadata entry deleted successfully');
-            window.alert('Metadata entry deleted successfully');
-          })
-          .catch(error => console.error('Error deleting metadata entry:', error));
-      } else {
-        window.alert('Temporary entry deleted successfully');
-      }
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const confirmed = window.confirm('Are you sure you want to submit these changes?');
-    if (confirmed) {
-      metadata.forEach(entry => {
-        console.log('Submitting entry:', entry); // Log the data structure
-        if (entry._id.startsWith('temp_')) {
-          axios.post('http://localhost:5000/metadata', entry)
-            .then(response => console.log('Metadata created successfully'))
-            .catch(error => console.error('Error creating metadata:', error));
-        } else {
-          axios.put(`http://localhost:5000/metadata/${entry._id}`, entry)
-            .then(response => console.log('Metadata updated successfully'))
-            .catch(error => console.error('Error updating metadata:', error));
-        }
-      });
-      window.alert('Metadata submitted successfully');
-    }
-  };
 
   return (
     <div>
@@ -88,7 +109,7 @@ const EditMetadataPage = () => {
                   <div className="main-card card d-flex h-100 flex-column">
                     <div className="card-body">
                       <h5 className="card-title py-2">Create Meta Data</h5>
-                      <form onSubmit={handleSubmit}>
+                      {/* <form onSubmit={handleSubmit}>
                         {metadata.map(entry => (
                           <div key={entry._id}>
                             <div className="row">
@@ -137,12 +158,16 @@ const EditMetadataPage = () => {
                         ))}
                         <button type="button" className="btn bgBlue btn-dipBlue text-black mt-4 m-2" onClick={handleAddEntry}>Add</button>
                         <button type="submit" className="btn bgBlue btn-dipBlue text-black mt-4 m-2">Submit</button>
-                      </form>
+                      </form> */}
+                       <SeoForm fetchSeoEntries={fetchSeoEntries} />
+                      {/* <SeoEdit /> */}
+                   
+                      <SeoList seoEntries={seoEntries} fetchSeoEntries={fetchSeoEntries} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="row" id="deleteTableItem">
+              {/* <div className="row" id="deleteTableItem">
                 <div className="col-md-12">
                   <div className="card mb-5">
                     <div className="card-body">
@@ -173,7 +198,7 @@ const EditMetadataPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

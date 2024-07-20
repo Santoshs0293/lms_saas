@@ -23,3 +23,15 @@ exports.fetchCodes = async (req, res) => {
     res.status(500).json({ success: false, error: "Error fetching codes" });
   }
 };
+
+
+exports.fetchCodesById = async (req, res) => {
+  try {
+    console.log('user2' , req.params.id);
+    const codes = await CodeModel.find({ user: req.params.id});
+    res.status(200).json({ codes });
+  } catch (error) {
+    console.error('Error fetching codes:', error);
+    res.status(500).json({ success: false, error: "Error fetching codes" });
+  }
+};

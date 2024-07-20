@@ -38,7 +38,14 @@ const courseSchema = mongoose.Schema(
  
   },
 
-  
+  teacherName : {
+    type : String
+  },
+
+  popUpText :{
+    type : String
+  },
+ 
   teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -49,6 +56,15 @@ lectures: [
     ref: 'Lecture'
   }
 ],
+
+reviews: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Review',
+  },
+],
+
+
   },
   {
     timestamps: true,

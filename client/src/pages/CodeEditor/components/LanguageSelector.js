@@ -6,49 +6,51 @@ import {
   MenuItem,
   MenuList,
   Text,
+  HStack,
 } from "@chakra-ui/react";
 import { LANGUAGE_VERSIONS } from "../constants";
 import { Helmet } from "react-helmet";
+
 const languages = Object.entries(LANGUAGE_VERSIONS);
 const ACTIVE_COLOR = "blue.400";
 
 const LanguageSelector = ({ language, onSelect }) => {
   return (
     <>
-       <Helmet>
+      <Helmet>
         <title>Advisions LMS</title>
         <meta name="description" content="Learning Management System" />
         <meta name="keywords" content="Advisions, LMS" />
-      </Helmet> 
-    <Box ml={2} mb={4}>
-      <Text mb={2} fontSize="lg">
-        Language:
-      </Text>
-      <Menu isLazy>
-        <MenuButton as={Button}>{language}</MenuButton>
-        <MenuList bg="#110c1b">
-          {languages.map(([lang, version]) => (
-            <MenuItem
-              key={lang}
-              color={lang === language ? ACTIVE_COLOR : ""}
-              bg={lang === language ? "gray.900" : "transparent"}
-              _hover={{
-                color: ACTIVE_COLOR,
-                bg: "gray.900",
-              }}
-              onClick={() => onSelect(lang)}
-            >
-              {lang}
-              &nbsp;
-              <Text as="span" color="gray.600" fontSize="sm">
-                ({version})
-              </Text>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
-    </Box>
+      </Helmet>
+      <Box ml={2} mb={4}>
+        <HStack spacing={2} alignItems="center">
+     
+          <Menu isLazy>
+            <MenuButton as={Button}  backgroundColor="white" color="black"> Language: {language}</MenuButton>
+            <MenuList>
+              {languages.map(([lang, version]) => (
+                <MenuItem
+                  key={lang}
+                  color={lang === language ? ACTIVE_COLOR : ""}
+                  _hover={{
+             
+                    bg: "blue.500",
+                  }}
+                  onClick={() => onSelect(lang)}
+                >
+                  {lang}
+                  &nbsp;
+                  <Text as="span" color="gray.600" fontSize="sm">
+                    ({version})
+                  </Text>
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
+        </HStack>
+      </Box>
     </>
   );
 };
+
 export default LanguageSelector;

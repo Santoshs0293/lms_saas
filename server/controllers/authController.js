@@ -1,9 +1,10 @@
-const UserModel = require("../model/UserModel");
 const bcrypt = require("bcryptjs");
-const controllerError = require("../utils/controllerError");
 const jwt = require("jsonwebtoken");
+const UserModel = require("../model/UserModel");
+const controllerError = require("../utils/controllerError");
 const { SECRET_KEY } = require("../config/keys");
 
+// Register Controller
 module.exports.register__controller = async (req, res, next) => {
   try {
     const { userName, email, password, confirmPassword, role } = req.body;
@@ -27,7 +28,7 @@ module.exports.register__controller = async (req, res, next) => {
       userName,
       email,
       password: hash,
-      role  // Save the role in the database
+      role
     });
 
     user.save()
@@ -44,7 +45,7 @@ module.exports.register__controller = async (req, res, next) => {
   }
 };
 
-// Login Controller (Example)
+// Login Controller
 module.exports.login__controller = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -84,7 +85,7 @@ module.exports.login__controller = async (req, res, next) => {
   }
 };
 
-
+// User Details Controller
 module.exports.details__controller = async (req, res, next) => {
   try {
     const {

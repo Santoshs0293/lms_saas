@@ -89,10 +89,10 @@ export default function Footer() {
               <a className="btn btn-link" href="/contact">
                 Contact Us
               </a>
-              <a className="btn btn-link" href="*">
+              <a className="btn btn-link" href="/privacyPolicy">
                 Privacy Policy
               </a>
-              <a className="btn btn-link" href="*">
+              <a className="btn btn-link" href="/privacyPolicy">
                 Terms & Condition
               </a>
               {/* <a className="btn btn-link" href="*">

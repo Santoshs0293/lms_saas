@@ -1,0 +1,63 @@
+.sidebar {
+    width: 200px;
+
+    padding: 20px;
+    float: left;
+    text-align: left;
+  }
+  
+  .option {
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    float: left;
+  }
+  
+  .sub-options {
+    margin-top: 10px;
+    padding-left: 10px;
+  }
+  
+  .sub-options a {
+    display: block;
+    padding: 5px 0;
+    color: #333;
+    text-decoration: none;
+  }
+  
+
+  
+
+  .menu-icon,
+  .sub-menu-icon {
+    padding-right: 10px;
+  }
+  
+  .menu-text {
+    margin-right: 10px;
+  }
+  
+
+
+
+.app-sidebar .vertical-nav-menu {
+    display: flex;
+
+    padding: 10px 20px; /* Adjust padding to increase clickable area */
+    color: #000; /* Default text color */
+    text-decoration: none;
+    width: 120%; /* Make the link take the full width */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.app-sidebar .vertical-nav-menu:hover {
+    background-color: #ffffff; /* Background color on hover */
+}
+
+.app-sidebar .active-link1 .vertical-nav-menu {
+    /* background-color: #007bff; 
+    color: #fff;  */
+}
+

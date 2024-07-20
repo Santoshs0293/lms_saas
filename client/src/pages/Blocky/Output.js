@@ -75,7 +75,7 @@ const Output = ({ language, code, output: initialOutput, setOutput }) => {
         </Button>
         <Box
           flex="1"
-          width="100%"
+          width="120%"
           p={2}
           border="1px solid"
           borderRadius={4}

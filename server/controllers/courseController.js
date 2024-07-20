@@ -18,6 +18,9 @@ module.exports.postCourse__controller = async (req, res, next) => {
     const imgFiles = req.files['img']; // Get the thumbnail image file
     const pdfFiles = req.files['pdf']; // Get the PDF files
 
+    console.log(pdfFiles);
+    console.log(imgFiles);
+
     let courseThumbnail = "";
     let coursePdf = "";
 
@@ -48,11 +51,26 @@ module.exports.postCourse__controller = async (req, res, next) => {
     
     if (Array.isArray(parsedLectures) && parsedLectures.length > 0) {
       // Save lectures
-      savedLectures = await Promise.all(parsedLectures.map(async (lecture) => {
+      savedLectures = await Promise.all(parsedLectures.map(async (lecture, index) => {
+        const lecturePdfFiles = req.files[`lecturePdf-${index}`]; // Get the PDF files for each lecture
+        let pdfUrl = "";
+    
+        if (lecturePdfFiles && lecturePdfFiles.length > 0) {
+          // Handle the PDF files upload
+          const pdfUrls = await Promise.all(lecturePdfFiles.map(async (file) => {
+            const pdf = await cloudinary.uploader.upload(file.path, { resource_type: "auto", response_type: "stream" });
+            return pdf.secure_url;
+          }));
+    
+          pdfUrl = pdfUrls.join(',');
+        }
+   
+
         const newLecture = new LectureModel({
           title: lecture.title,
           description: lecture.description,
           videoUrl: lecture.videoUrl,
+          pdfUrl: pdfUrl, // Update the pdfUrl for each lecture
           teacherId: req.user._id // Associate lecture with teacher
         });
         await newLecture.save();
@@ -89,6 +107,8 @@ module.exports.postCourse__controller = async (req, res, next) => {
     });
   }
 };
+
+
 
 
 module.exports.getCourses__controller = async (req, res, next) => {
@@ -185,20 +205,42 @@ module.exports.getItems__controller = async (req, res, next) => {
 };
 
 exports.updateCourse = async (req, res) => {
-  const { courseName, courseLink, courseDescription, coursePrice } = req.body;
-  if (!courseName || !courseLink || !courseDescription || !coursePrice) {
-      return res.status(400).json({ error: 'courseLink and coursePdf must be provided' });
-  }
+  
+  const { id, courseName, courseLink, courseDescription, coursePrice } = req.body;
 
+    try {
+        const course = await CourseModel.findByIdAndUpdate(id, {
+            courseName,
+            courseLink,
+            courseDescription,
+            coursePrice
+        }, { new: true });
+
+        res.json({ message: 'Course updated successfully', course });
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating course' });
+    }
+};
+
+exports.updateLecture = async (req, res) => {
   try {
-      const updatedUser = await CourseModel.findOneAndUpdate({ courseName }, { courseLink, courseDescription, coursePrice },{ new: true });
-      if (!updatedUser) {
-          return res.status(404).json({ error: 'Course not found' });
+      const { lectureId } = req.params;
+      const { title, description, videoUrl } = req.body;
+
+      const updatedLecture = await LectureModel.findByIdAndUpdate(
+          lectureId,
+          { title, description, videoUrl },
+          { new: true }
+      );
+
+      if (!updatedLecture) {
+          return res.status(404).json({ error: 'Lecture not found' });
       }
-      res.json({ message: 'Course role updated successfully', user: updatedUser });
-  } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+
+      res.status(200).json({ lecture: updatedLecture });
+  } catch (error) {
+      console.error('Error updating lecture:', error);
+      res.status(500).json({ error: 'Server error' });
   }
 };
 
@@ -287,12 +329,31 @@ exports.addCourse = async (req, res) => {
 module.exports.createLectures = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const { lectures } = req.body;
+    const lectures = JSON.parse(req.body.lectures);
 
     // Validate that the course exists
     const course = await CourseModel.findById(courseId);
     if (!course) {
       return res.status(404).json({ error: 'Course not found' });
+    }
+
+    // Check if lectures is an array
+    if (!Array.isArray(lectures)) {
+      return res.status(400).json({ error: 'Lectures should be an array' });
+    }
+
+    // Attach the PDF URLs to the lectures
+    for (let i = 0; i < lectures.length; i++) {
+      if (req.files && req.files[i]) {
+        const files = req.files[i].map ? req.files[i] : [req.files[i]];
+        const pdfUrls = await Promise.all(
+          files.map(async (file) => {
+            const pdf = await cloudinary.uploader.upload(file.path, { resource_type: 'auto' });
+            return pdf.secure_url;
+          })
+        );
+        lectures[i].pdfUrl = pdfUrls.join(',');
+      }
     }
 
     // Create the lectures with the associated courseId
@@ -314,25 +375,35 @@ module.exports.createLectures = async (req, res) => {
 };
 
 
+
 exports.updateLecture = async (req, res) => {
   try {
-      const { lectureId } = req.params;
-      const { title, description, videoUrl } = req.body;
+    const { lectureId } = req.params;
+    const { title, description, videoUrl } = req.body;
 
-      const updatedLecture = await LectureModel.findByIdAndUpdate(
-          lectureId,
-          { title, description, videoUrl },
-          { new: true }
-      );
+    let pdfUrl;
 
-      if (!updatedLecture) {
-          return res.status(404).json({ error: 'Lecture not found' });
-      }
+    // Check if a new PDF file is included in the request
+    if (req.file) {
+      const pdf = await cloudinary.uploader.upload(req.file.path, { resource_type: 'auto' });
+      pdfUrl = pdf.secure_url;
+    }
 
-      res.status(200).json({ lecture: updatedLecture });
+    // Update the lecture
+    const updatedLecture = await LectureModel.findByIdAndUpdate(
+      lectureId,
+      { title, description, videoUrl, ...(pdfUrl && { pdfUrl }) },
+      { new: true }
+    );
+
+    if (!updatedLecture) {
+      return res.status(404).json({ error: 'Lecture not found' });
+    }
+
+    res.status(200).json({ lecture: updatedLecture });
   } catch (error) {
-      console.error('Error updating lecture:', error);
-      res.status(500).json({ error: 'Server error' });
+    console.error('Error updating lecture:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 };
 

@@ -41,26 +41,27 @@ const Output = ({ editorRef, language, output: initialOutput, setOutput }) => {
         <meta name="description" content="Learning Management System" />
         <meta name="keywords" content="Advisions, LMS" />
       </Helmet> 
-    <Box w="40%" ml={2} mb={4} mt={-19}>
-      <Text mb={2} fontSize="lg">
-        Output
-      </Text>
+    <Box w="40%" ml={2} mb={4}>
+    
       <Button
         variant="outline"
         colorScheme="green"
-        mb={4}
+        mb={2}
+
         isLoading={isLoading}
         onClick={runCode}
       >
         Run Code
       </Button>
       <Box
-        height="75vh"
+        height="90vh"
         p={2}
         color={isError ? "red.400" : ""}
         border="1px solid"
         borderRadius={4}
         borderColor={isError ? "red.500" : "#333"}
+        width={"250%"}
+        
       >
         {output
           ? output.split("\n").map((line, i) => <Text key={i}>{line}</Text>)

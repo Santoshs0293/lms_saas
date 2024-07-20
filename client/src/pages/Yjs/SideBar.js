@@ -9,14 +9,15 @@ const Sidebar = ({ onFileClick, onCodeSelect }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
+
   useEffect(() => {
     const fetchCodes = async () => {
       setIsLoading(true);
       try {
-        const token = localStorage.getItem('auth_token'); // Changed from 'token' to 'auth_token'
+        const token = localStorage.getItem('auth_token');
         const response = await axiosInstance.get("/api/code", {
           headers: {
-            Authorization: "Bearer " + token, // Changed from 'localStorage.getItem("auth_token")' to 'token'
+            Authorization: "Bearer " + token,
           }
         });
         setCodes(response.data.codes);
@@ -37,34 +38,34 @@ const Sidebar = ({ onFileClick, onCodeSelect }) => {
         <meta name="description" content="Learning Management System" />
         <meta name="keywords" content="Advisions, LMS" />
       </Helmet>
-      <Box className="box-fix" w="30%">
-        <Text mb={2} fontSize="lg" textAlign="center" mt={4} textColor={"white"}>
+      <Box className="box-fix" w="20%">
+        <Text mb={2} fontSize="lg" textAlign="center" mt={4} >
           Saved Code
         </Text>
         <Box
-      height="80vh"
-      p={2}
-      color={isError ? "red.400" : ""}
-      border="1px solid"
-      borderRadius={4}
-      borderColor={isError ? "red.500" : "#333"}
-      overflowY="scroll"
-      sx={{
-        '&::-webkit-scrollbar': {
-          width: '8px',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: '#f1f1f1',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: '#888',
-          borderRadius: '4px',
-        },
-        '&::-webkit-scrollbar-thumb:hover': {
-          background: '#555',
-        },
-      }}
-    >
+          height="80vh"
+          p={2}
+          color={isError ? "red.400" : ""}
+          border="1px solid"
+          borderRadius={4}
+          borderColor={isError ? "red.500" : "gray.200"}
+          overflowY="scroll"
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: '#f1f1f1',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#888',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              background: '#555',
+            },
+          }}
+        >
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
@@ -76,10 +77,9 @@ const Sidebar = ({ onFileClick, onCodeSelect }) => {
                   <code>{code.code}</code>
                   <br />
                   <strong>Output</strong>
-                  <p>{code.output}</p> {/* Display output */}
+                  <p>{code.output}</p>
                   <button
                     onClick={() => onCodeSelect(code.code, code.language)}
-                    
                   >
                     Click to display on YJS
                   </button>
@@ -87,7 +87,7 @@ const Sidebar = ({ onFileClick, onCodeSelect }) => {
               ))}
             </ul>
           )}
-          {isError && <Text color="red.500">Error fetching codes</Text>}
+          {isError && <Text color="red.500">Error fetching codes or You are not logged In.</Text>}
         </Box>
       </Box>
     </>

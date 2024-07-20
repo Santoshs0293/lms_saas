@@ -31,6 +31,7 @@ function StudentsDetails() {
     identityVerifications: [''],
     phoneNumber: '',
   });
+  const axiosInstance = axios.create({ baseURL: process.env.REACT_APP_API_URL });
   const [userData, setUserData] = useState(null);
   const toast = useToast();
   useEffect(() => {
@@ -89,7 +90,7 @@ function StudentsDetails() {
     console.log('Submitting form data:', formData); // Log form data for debugging
     try {
       const userId = userData._id; // Assuming userData contains the userId
-      const response = await axios.put(`http://localhost:5000/auth/details/${userId}`, formData, {
+      const response = await axiosInstance.put(`/auth/details/${userId}`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -119,8 +120,8 @@ function StudentsDetails() {
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item"><a href="">Dashboard</a></li>
-                  <li className="breadcrumb-item"><a href="">Instructor</a></li>
-                  <li className="breadcrumb-item active" aria-current="page">Create</li>
+                  <li className="breadcrumb-item"><a href="">Details</a></li>
+                  <li className="breadcrumb-item active" aria-current="page">Add</li>
                 </ol>
               </nav>
             </div>
